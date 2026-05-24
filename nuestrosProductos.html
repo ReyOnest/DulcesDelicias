@@ -27,28 +27,38 @@
     <header class="header">
         <div class="container header-content">
             <h1>Dulces Delicias</h1>
-            <nav><a href="home.html">Volver al Inicio</a></nav>
+            <nav>
+                <a href="home.html">Inicio</a>
+                <a href="carrito.html" class="btn btn-primary" style="margin-left: 15px;">
+                    <i class="fas fa-shopping-cart"></i> Ver Carrito
+                </a>
+            </nav>
         </div>
     </header>
 
     <main class="container">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <button id="btn-mostrar-todo" class="btn btn-outline" style="display: none;">
+                Ver todos los productos
+            </button>
+        </div>
         <section class="categoria-section">
-            <h2>Tortas</h2>
+            <h2>Tortas Personalizadas</h2>
             <div id="grid-tortas" class="productos-grid"></div>
         </section>
 
         <section class="categoria-section">
-            <h2>Postres</h2>
+            <h2>Postres Fríos</h2>
             <div id="grid-postres" class="productos-grid"></div>
         </section>
 
         <section class="categoria-section">
-            <h2>Cupcakes</h2>
+            <h2>Cupcakes Especiales</h2>
             <div id="grid-cupcakes" class="productos-grid"></div>
         </section>
 
         <section class="categoria-section">
-            <h2>Galletas</h2>
+            <h2>Galletas Artesanales</h2>
             <div id="grid-galletas" class="productos-grid"></div>
         </section>
     </main>

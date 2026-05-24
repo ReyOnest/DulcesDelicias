@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"> 
+    <title>Home</title>
+</head>
+<body>
+  
+        <h1>Home</h1>
+        <button id="logout">Logout</button>
+  
+  <section>
+
+        <h2>Crear Usuarios Nuevos</h2>
+        <form id="signupForm">
+            <label>Nombre</label>
+            <input type="text" placeholder="..." id="name" required autofocus>
+            <label>Mail</label>
+            <input type="email" placeholder="..." id="email" required>
+            <label>Contraseña</label>
+            <input type="password" placeholder="..." id="password" required>
+            <label>rol</label>
+            <input type="text" placeholder="..." id="rol" required>
+            
+            <input type="submit" id="btnGuardar" value="Guardar">
+            <input type="button" id="btnActualizar" value="Actualizar">
+        </form>
+               
+  </section>
+
+    <table class="table" id = "tablaUsuarios">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Correo</th>
+      <th scope="col">Contraseña</th>
+      <th scope="col">Rol</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>mark.o@mdo</td>
+      <td>Admin</td>
+      <td>
+        <button class="btn btn-primary btnActualizar">Actualizar</button>
+        <button class="btn btn-danger btnEliminar">Eliminar</button>
+      </td>
+    </tr>
+
+
+  </tbody>
+</table>
+    <script src="js/crudClientes.js"></script>
+    <script src="js/logout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

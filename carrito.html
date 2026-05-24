@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Pedido - Dulces Delicias</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .carrito-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .carrito-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .total-section { text-align: right; margin-top: 20px; font-size: 1.5em; font-weight: bold; }
+        .btn-checkout { background-color: #ADD8E6; color: #fff; padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <h1>Tu Carrito</h1>
+            <nav><a href="productos_cliente.html">Seguir Comprando</a></nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="carrito-container">
+            <div id="lista-carrito">
+                </div>
+            <div class="total-section">
+                Total: $<span id="total-pedido">0</span>
+            </div>
+            <button class="btn btn-checkout" onclick="finalizarPedido()">Finalizar Pedido</button>
+        </div>
+    </main>
+
+    <script src="js/carrito.js"></script>
+</body>
+</html>

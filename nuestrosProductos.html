@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Productos - Dulces Delicias</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .categoria-section { margin-bottom: 50px; }
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #eee;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <h1>Dulces Delicias</h1>
+            <nav><a href="home.html">Volver al Inicio</a></nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="categoria-section">
+            <h2>Tortas</h2>
+            <div id="grid-tortas" class="productos-grid"></div>
+        </section>
+
+        <section class="categoria-section">
+            <h2>Postres</h2>
+            <div id="grid-postres" class="productos-grid"></div>
+        </section>
+
+        <section class="categoria-section">
+            <h2>Cupcakes</h2>
+            <div id="grid-cupcakes" class="productos-grid"></div>
+        </section>
+
+        <section class="categoria-section">
+            <h2>Galletas</h2>
+            <div id="grid-galletas" class="productos-grid"></div>
+        </section>
+    </main>
+
+    <script src="js/productos.js"></script>
+</body>
+</html>

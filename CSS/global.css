@@ -1,0 +1,87 @@
+/* Estilos Globales para Dulces Delicias */
+:root {
+    --primary-color: #FFB6C1; /* Rosado Suave */
+    --secondary-color: #ADD8E6; /* Azul Celeste */
+    --accent-color: #FFDAB9; /* Melocotón Suave */
+    --text-dark: #333;
+    --text-light: #fefefe;
+    --background-light: #fdfdfd;
+    --background-grey: #f8f8f8;
+    --font-heading: 'Pacifico', cursive;
+    --font-body: 'Open Sans', sans-serif;
+    --border-radius-soft: 8px;
+    --transition-speed: 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--background-light);
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Botones estilo Dulces Delicias */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-soft);
+    text-decoration: none;
+    transition: background var(--transition-speed);
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.btn-primary:hover {
+    background-color: #ff9fb0;
+}
+
+/* Header para páginas interiores (basado en el home) */
+.header {
+    background-color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Footer (basado en el home) */
+.footer {
+    background-color: var(--background-grey);
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.social-links a {
+    margin: 0 10px;
+    font-size: 1.5em;
+    color: var(--primary-color);
+}

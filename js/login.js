@@ -1,31 +1,35 @@
 const formularioLogin = document.getElementById('loginForm');
 
-formularioLogin.addEventListener('submit',(e)=>{
-
+formularioLogin.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // capturamos los valores que continen los input's del html que email y el password
+    // Capturamos los valores
     const email = document.getElementById('email').value.trim().toLowerCase();
     const pass = document.getElementById('password').value.trim().toLowerCase();
 
-    //Obtener la lista de usuarios registrados en el local store
+    // Obtener la lista de usuarios registrados en el localStorage
     const Usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-    // buscar coincidencia dentro del objeto con el email y el password ingresados por el usuario 
+    // Buscar coincidencia
     const validarUser = Usuarios.find(usuario => usuario.email === email && usuario.password === pass);
 
-
-    if(!validarUser){
+    if (!validarUser) {
         alert('Usuario y/o contraseña incorrecto');
-    }else{
-        //Mensaje de bienvenida
-        alert(` Bienvenido señor ${validarUser.rol}  ${validarUser.nombre} a la administración de su perfil`);
+    } else {
+        // Mensaje de bienvenida
+        alert(`Bienvenido ${validarUser.nombre}, serás redirigido a tu panel.`);
 
-        // guardar los datos del usuario y registrar el inicio de sesión
-        sessionStorage.setItem('sesionUsuario',JSON.stringify(validarUser));
-       // validar el tipo de rol del usuario y redirigir a la pagina correspondiente
-       // if(validarUser.rol === cliente){ .. }
-        // redirigir al usuario a la pagina de home
-        window.location.href='home.html';
+        // Guardar los datos del usuario en la sesión
+        sessionStorage.setItem('sesionUsuario', JSON.stringify(validarUser));
+
+        // Validación del tipo de rol y redirección
+        // Asegúrate de que el valor en tu objeto usuario sea 'admin' o 'cliente'
+        if (validarUser.rol.toLowerCase() === 'admin') {
+            // Redirigir a la vista de administrador
+            window.location.href = 'homeAdmin.html';
+        } else {
+            // Redirigir a la vista de cliente (home)
+            window.location.href = 'home.html';
+        }
     }
 });

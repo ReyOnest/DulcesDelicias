@@ -53,7 +53,7 @@ formRegistro.addEventListener('submit', (e) => {
         // enviar información al local store
         localStorage.setItem('usuarios', JSON.stringify(Usuarios));
 
-        alert('Usauario registrado con Exito');
+        alert('Cliente registrado con Exito');
 
         // retornar a la pagina de login
 

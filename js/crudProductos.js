@@ -1,9 +1,25 @@
 // Captura botón de logout
 const btnLogout = document.getElementById('logout');
-btnLogout.addEventListener('click', () => {
-    sessionStorage.removeItem('sesionUsuario');
-    window.location.href = 'login.html';
-});
+if (btnLogout) {
+    btnLogout.addEventListener('click', () => {
+        sessionStorage.removeItem('sesionUsuario');
+        window.location.href = 'login.html';
+    });
+}
+
+// 0. Función para mostrar/ocultar campos dinámicos
+window.actualizarCampos = () => {
+    const tipo = document.getElementById('product_type').value;
+    
+    // Ocultar todos los contenedores primero
+    document.querySelectorAll('[id^="campo-"]').forEach(el => el.classList.add('d-none'));
+
+    // Mostrar el contenedor según la categoría seleccionada
+    if (tipo === 'Tortas') document.getElementById('campo-tortas').classList.remove('d-none');
+    if (tipo === 'Postres') document.getElementById('campo-postres').classList.remove('d-none');
+    if (tipo === 'Cupcakes') document.getElementById('campo-cupcakes').classList.remove('d-none');
+    if (tipo === 'Galletas') document.getElementById('campo-galletas').classList.remove('d-none');
+};
 
 // 1. Crear/Guardar Producto
 const formProducto = document.getElementById('productForm');
@@ -11,48 +27,52 @@ const formProducto = document.getElementById('productForm');
 formProducto.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // Captura de datos
+    const tipo = document.getElementById('product_type').value;
+    
+    // Captura dinámica según el tipo
+    let valorExtra = "";
+    if (tipo === 'Tortas') valorExtra = document.getElementById('slices').value;
+    if (tipo === 'Postres') valorExtra = document.getElementById('size-postre').value;
+    if (tipo === 'Cupcakes') valorExtra = document.getElementById('cobertura').value;
+    if (tipo === 'Galletas') valorExtra = document.getElementById('tipo-galleta').value;
+
     const producto = {
-        id: document.getElementById('id_product').value || Date.now(), // ID temporal
+        id: document.getElementById('id_product').value || Date.now(),
         name: document.getElementById('name').value.trim(),
         flavor: document.getElementById('flavor').value.trim(),
         price: parseFloat(document.getElementById('price').value),
         stock: parseInt(document.getElementById('stock').value),
         state: document.getElementById('state').value.trim(),
-        product_type: document.getElementById('product_type').value.trim(),
-        slices: parseInt(document.getElementById('slices').value),
-        size: document.getElementById('size').value.trim()
+        product_type: tipo,
+        especificacion: valorExtra // Guardamos la opción seleccionada aquí
     };
 
-    // Validar datos básicos
     if (!producto.name || !producto.price) {
         alert('Por favor, ingrese al menos nombre y precio');
         return;
     }
 
     const productos = JSON.parse(localStorage.getItem('productos')) || [];
-    
-    // Si el ID existe, estamos editando
     const index = productos.findIndex(p => p.id == producto.id);
+    
     if (index !== -1) {
         productos[index] = producto;
     } else {
         productos.push(producto);
     }
-
+    
     localStorage.setItem('productos', JSON.stringify(productos));
-    alert('Producto guardado con éxito');
     formProducto.reset();
-    document.getElementById('id_product').value = '';
+    actualizarCampos(); // Ocultar campos al terminar
     mostrarProductos();
 });
 
-// 2. Leer Productos
+// 2. Mostrar Productos
 function mostrarProductos() {
     const productos = JSON.parse(localStorage.getItem('productos')) || [];
     const tbody = document.getElementById('tbody');
     tbody.innerHTML = '';
-
+    
     productos.forEach((p, index) => {
         const fila = document.createElement('tr');
         fila.innerHTML = `
@@ -61,7 +81,7 @@ function mostrarProductos() {
             <td>${p.flavor}</td>
             <td>$${p.price}</td>
             <td>${p.stock}</td>
-            <td>${p.product_type}</td>
+            <td>${p.product_type} (${p.especificacion})</td>
             <td>
                 <button class="btn btn-primary btn-sm" onclick="editarProducto(${index})">Editar</button>
                 <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${index})">Eliminar</button>
@@ -71,15 +91,7 @@ function mostrarProductos() {
     });
 }
 
-// 3. Eliminar Producto
-window.eliminarProducto = (index) => {
-    const productos = JSON.parse(localStorage.getItem('productos')) || [];
-    productos.splice(index, 1);
-    localStorage.setItem('productos', JSON.stringify(productos));
-    mostrarProductos();
-};
-
-// 4. Editar Producto (Carga los datos al formulario)
+// 4. Editar Producto
 window.editarProducto = (index) => {
     const productos = JSON.parse(localStorage.getItem('productos'));
     const p = productos[index];
@@ -91,9 +103,12 @@ window.editarProducto = (index) => {
     document.getElementById('stock').value = p.stock;
     document.getElementById('state').value = p.state;
     document.getElementById('product_type').value = p.product_type;
-    document.getElementById('slices').value = p.slices;
-    document.getElementById('size').value = p.size;
+    
+    // Llamar a actualizarCampos para mostrar el campo correcto y rellenar el valor
+    actualizarCampos();
+    // (Opcional: aquí podrías setear el valor del select correspondiente si fuera necesario)
+    
+    mostrarProductos();
 };
 
-// Inicializar tabla al cargar
-document.addEventListener('DOMContentLoaded', mostrarProductos);
+mostrarProductos();

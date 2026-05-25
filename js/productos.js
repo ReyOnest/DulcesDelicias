@@ -41,22 +41,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // 4. Inyectar los productos
-    productos.forEach(p => {
-        const categoria = p.product_type ? p.product_type.toLowerCase() : '';
+   // 4. Inyectar los productos
+productos.forEach(p => {
+    const categoria = p.product_type ? p.product_type.toLowerCase() : '';
+    
+    if (contenedores[categoria]) {
+        // Generamos el nombre del archivo basado en el nombre del producto
+        const nombreArchivo = p.name.toLowerCase().replace(/\s+/g, '_') + '.jpg';
         
-        if (contenedores[categoria]) {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <h3>${p.name}</h3>
-                <p>Sabor: ${p.flavor}</p>
-                <p><strong>$${p.price}</strong></p>
-                <button class="btn btn-primary" onclick="agregarAlCarrito(${p.id})">Pedir</button>
-            `;
-            contenedores[categoria].appendChild(card);
-        }
-    });
+        const card = document.createElement('div');
+        card.className = 'card';
+        
+        // Simplifica el innerHTML para dejar el estilo al CSS (es más estable)
+card.innerHTML = `
+    <img src="img/${nombreArchivo}" 
+         alt="${p.name}" 
+         onerror="this.src='img/default.jpg'">
+    <h3>${p.name}</h3>
+    <p><strong>Detalle:</strong> ${p.especificacion || 'N/A'}</p>
+    <p><strong>Precio:</strong> $${p.price}</p>
+    <button class="btn btn-primary" onclick="agregarAlCarrito(${p.id})">Pedir</button>
+`;
+        
+        contenedores[categoria].appendChild(card);
+    }
+});
 
     // 5. Scroll suave al objetivo
     if (targetId) {

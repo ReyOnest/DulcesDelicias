@@ -32,9 +32,9 @@ formProducto.addEventListener('submit', (e) => {
     // Captura dinámica según el tipo
     let valorExtra = "";
     if (tipo === 'Tortas') valorExtra = document.getElementById('slices')?.value || "";
-    if (tipo === 'Postres') valorExtra = document.getElementById('size-postre')?.value || "";
-    if (tipo === 'Cupcakes') valorExtra = document.getElementById('cobertura')?.value || "";
-    if (tipo === 'Galletas') valorExtra = document.getElementById('tipo-galleta')?.value || "";
+    if (tipo === 'Postres') valorExtra = document.getElementById('size-pastry')?.value || "";
+    if (tipo === 'Cupcakes') valorExtra = document.getElementById('flavor')?.value || "";
+    if (tipo === 'Galletas') valorExtra = document.getElementById('type-cookie')?.value || "";
 
     const producto = {
         id: document.getElementById('id_product').value || Date.now().toString(),
@@ -102,7 +102,7 @@ window.editarProducto = (index) => {
     
     actualizarCampos();
 
-    // Importante: Rellenar el campo dinámico cargado
+    // Rellenar el detalle específico según el tipo de producto
     const tipo = p.product_type;
     if (tipo === 'Tortas') document.getElementById('slices').value = p.especificacion;
     if (tipo === 'Postres') document.getElementById('size-postre').value = p.especificacion;
@@ -115,14 +115,14 @@ window.eliminarProducto = (index) => {
     let productos = JSON.parse(localStorage.getItem('productos')) || [];
     productos.splice(index, 1);
     localStorage.setItem('productos', JSON.stringify(productos));
-    alert("Producto eliminado"); // Para probar si entra a la función
+    alert("Producto eliminado"); 
     mostrarProductos();
-};
+};  
 
 // Inicializar tabla
 mostrarProductos();
 
-// Agrega esto al final de tu archivo crudProductos.js, fuera de cualquier función
+// Actualizar campos al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
     actualizarCampos();
 });

@@ -47,21 +47,25 @@ productos.forEach(p => {
     
     if (contenedores[categoria]) {
         // Generamos el nombre del archivo basado en el nombre del producto
-        const nombreArchivo = p.name.toLowerCase().replace(/\s+/g, '_') + '.jpg';
+        const nombreArchivo = p.name + '.jpg';
         
         const card = document.createElement('div');
         card.className = 'card';
         
         // Simplifica el innerHTML para dejar el estilo al CSS (es más estable)
-card.innerHTML = `
-    <img src="img/${nombreArchivo}" 
-         alt="${p.name}" 
-         onerror="this.src='img/default.jpg'">
-    <h3>${p.name}</h3>
-    <p><strong>Detalle:</strong> ${p.especificacion || 'N/A'}</p>
-    <p><strong>Precio:</strong> $${p.price}</p>
-    <button class="btn btn-primary" onclick="agregarAlCarrito(${p.id})">Pedir</button>
-`;
+        card.innerHTML = `
+        <div class="img-wrapper" style="height: 200px; background: #f8f8f8; border-radius: 10px 10px 0 0; overflow: hidden;">
+            <img src="img/${nombreArchivo}" 
+                 alt="${p.name}" 
+                 onload="this.style.opacity='1'"
+                 onerror="this.onerror=null; this.src='img/default.jpg'; this.style.opacity='1'"
+                 style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s;">
+        </div>
+        <h3>${p.name}</h3>
+        <p><strong>Detalle:</strong> ${p.especificacion || 'N/A'}</p>
+        <p><strong>Precio:</strong> $${p.price}</p>
+        <button class="btn btn-primary" onclick="agregarAlCarrito(${p.id})">Pedir</button>
+    `;
         
         contenedores[categoria].appendChild(card);
     }

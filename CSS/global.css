@@ -574,6 +574,34 @@ section {
     border-bottom: 1px solid #ddd;
 }
 
+/* Estilo para el contenedor de la tabla */
+.table-container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    overflow-x: auto; /* Para que sea responsive en móviles */
+}
+
+/* Estilos de la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+table th {
+    color: var(--primary-color);
+    font-family: var(--font-heading);
+}
+
 .card img {
     display: block;
     width: 100%;
@@ -699,4 +727,69 @@ section {
     .testimonial-card {
         width: 100%; /* 1 columna */
     }
+}
+
+/* BORRA la regla 'body { display: flex; ... }' antigua */
+/* Y reemplázala por esta clase específica: */
+
+.admin-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-layout main {
+    flex: 1;
+}
+
+.header, .footer {
+    width: 100%;
+}
+
+/* Estilo para la Tabla (la "tarjeta") */
+.table-container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Sombra suave */
+    margin: 20px 0;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+/* Asegura uniformidad */
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo unificado para inputs y selects */
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius-soft);
+    font-size: 14px;
+}
+
+/* Eliminar márgenes raros de los formularios */
+#productForm {
+    margin-top: 20px;
 }

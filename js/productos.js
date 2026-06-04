@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'galletas': document.getElementById('grid-galletas')
     };
 
-    // 3. Lógica de filtrado por URL
+    // 3. Filtrado por categoría desde URL
     const params = new URLSearchParams(window.location.search);
     const targetId = params.get('target'); // Ej: 'grid-tortas'
 
@@ -52,7 +52,7 @@ productos.forEach(p => {
         const card = document.createElement('div');
         card.className = 'card';
         
-        // Simplifica el innerHTML para dejar el estilo al CSS (es más estable)
+        // Creamos las tarjetas de producto con manejo de carga de imágenes
         card.innerHTML = `
         <div class="img-wrapper" style="height: 200px; background: #f8f8f8; border-radius: 10px 10px 0 0; overflow: hidden;">
             <img src="img/${nombreArchivo}" 
@@ -82,7 +82,21 @@ productos.forEach(p => {
     }
 });
 
-function agregarAlCarrito(productId) {
-    console.log("Producto añadido al carrito:", productId);
-    alert("Producto añadido al carrito");
+function agregarAlCarrito(idProducto) {
+    // 1. Obtener todos los productos (necesitas tener la lista de productos original)
+    const productos = JSON.parse(localStorage.getItem('productos')) || [];
+    const productoSeleccionado = productos.find(p => p.id == idProducto);
+
+    if (productoSeleccionado) {
+        // 2. Obtener el carrito actual
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        
+        // 3. Agregar el nuevo producto
+        carrito.push(productoSeleccionado);
+        
+        // 4. Guardar de nuevo en localStorage
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        
+        alert("Producto agregado correctamente");
+    }
 }

@@ -1,10 +1,31 @@
-// adminUsuarios.js (o tu crudUsuarios.js corregido)
+// 1. Elementos del DOM
 const formCreacion = document.getElementById('signupForm');
+const tbody = document.getElementById('tbody');
 
+// 2. Función para renderizar la tabla desde LocalStorage
+const renderizarTabla = () => {
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    tbody.innerHTML = ''; // Limpiamos la tabla antes de llenar
+    
+    usuarios.forEach((u, index) => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${u.nombre}</td>
+                <td>${u.email}</td>
+                <td>${u.rol.toUpperCase()}</td>
+                <td>
+                    <button class="btn btn-danger" onclick="eliminarUsuario(${index})">Eliminar</button>
+                </td>
+            </tr>
+        `;
+    });
+};
+
+// 3. Lógica para Guardar Usuario
 formCreacion.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const name = document.getElementById('name').value.trim().toLowerCase();
+    const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim().toLowerCase();
     const password = document.getElementById('password').value.trim();
     const rol = document.getElementById('rol').value.trim().toLowerCase(); // Captura 'admin' o 'cliente'
@@ -30,3 +51,11 @@ formCreacion.addEventListener('submit', (e) => {
     formCreacion.reset();
     renderizarTabla(); // Asegúrate de llamar a tu función que actualiza la tabla
 });
+
+// 4. Lógica para Eliminar Usuario
+window.eliminarUsuario = (index) => {
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    usuarios.splice(index, 1);
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    renderizarTabla();
+};

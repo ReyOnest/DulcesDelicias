@@ -5,7 +5,7 @@ formularioLogin.addEventListener('submit', (e) => {
 
     // Capturamos los valores
     const email = document.getElementById('email').value.trim().toLowerCase();
-    const pass = document.getElementById('password').value.trim().toLowerCase();
+    const pass = document.getElementById('password').value.trim();
 
     // Obtener la lista de usuarios registrados en el localStorage
     const Usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
@@ -28,7 +28,7 @@ formularioLogin.addEventListener('submit', (e) => {
             // Redirigir a la vista de administrador
             window.location.href = 'homeAdmin.html';
         } else {
-            // Redirigir a la vista de cliente (home)
+            // Redirigir a la página de inicio
             window.location.href = 'home.html';
         }
     }

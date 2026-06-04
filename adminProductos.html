@@ -8,83 +8,117 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Gestión de Productos</title>
 </head>
-<body class="container mt-4">
- 
-    <h1>Gestión de Productos</h1>
-    <button id="logout" class="btn btn-secondary mb-3">Logout</button>
- 
-    <section class="card p-4 mb-4">
-        <h2>Crear / Editar Producto</h2>
-        <form id="productForm" class="row g-3">
-            <input type="hidden" id="id_product">
-            
-            <div class="col-md-3"><label>Nombre</label><input type="text" id="name" class="form-control" required></div>
-            <div class="col-md-3"><label>Sabor</label><input type="text" id="flavor" class="form-control"></div>
-            <div class="col-md-3"><label>Precio</label><input type="number" id="price" class="form-control" required></div>
-            <div class="col-md-3"><label>Stock</label><input type="number" id="stock" class="form-control"></div>
-            <div class="col-md-3"><label>Estado</label><input type="text" id="state" class="form-control"></div>
-            <div class="col-md-3">
-                <label>Categoría</label>
-                <select id="product_type" class="form-control" onchange="actualizarCampos()">
-                    <option value="">Seleccione...</option>
-                    <option value="Tortas">Tortas</option>
-                    <option value="Postres">Postres</option>
-                    <option value="Cupcakes">Cupcakes</option>
-                    <option value="Galletas">Galletas</option>
-                </select>
+<body class="admin-layout">
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="img/logo mejorado.png" alt="Logo Dulces Delicias">
             </div>
+            <h1>Gestión de Productos</h1>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="home.html">Inicio</a></li>
+                    <li><a href="nuestrosProductos.html">Productos</a></li>
+                    <li><a href="homeAdmin.html">Administrador</a></li>
+                </ul>
+            </nav>
+            <button id="logout" class="btn btn-primary call-to-action">Logout <i class="fas fa-sign-out-alt"></i></button>
+        </div>
+    </header>
 
-            <div id="campo-tortas" class="col-md-3 d-none">
-                <label>Porciones</label>
-                <select id="slices" class="form-control">
-                    <option value="12">12</option><option value="20">20</option><option value="30">30</option>
-                </select>
+    <main class="container">
+        <div class="table-container">
+            <section>
+                <h2>Crear / Editar Producto</h2>
+                <form id="productForm">
+                    <input type="hidden" id="id_product">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Sabor</label>
+                            <input type="text" id="flavor">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Precio</label>
+                            <input type="number" id="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Stock</label>
+                            <input type="number" id="stock">
+                        </div>
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <input type="text" id="state">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Categoría</label>
+                            <select id="product_type" onchange="actualizarCampos()">
+                                <option value="">Seleccione...</option>
+                                <option value="Tortas">Tortas</option>
+                                <option value="Postres">Postres</option>
+                                <option value="Cupcakes">Cupcakes</option>
+                                <option value="Galletas">Galletas</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="container-extra">
+                            <div id="campo-tortas" class="d-none">
+                                <label>Porciones</label>
+                                <select id="slices"><option value="12">12</option><option value="20">20</option><option value="30">30</option></select>
+                            </div>
+                            <div id="campo-postres" class="d-none">
+                                <label>Tamaño</label>
+                                <select id="size-postre"><option value="Pequeño">Pequeño</option><option value="Grande">Grande</option></select>
+                            </div>
+                            </div>
+                    </div>
+
+                    <button type="submit" id="btnGuardar" class="btn btn-primary" style="width: 100%;">Guardar Producto</button>
+                </form>
+            </section>
+        </div>
+
+        <div class="table-container">
+            <table id="tablaProductos">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Sabor</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Tipo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/1b6KKj8rv3/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/dulce_delicias05?igsh=MWYzdGk1anViNW9lag==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@gloriagalvis363?_r=1&_t=ZS-92HcTF0R5MN" target="_blank" aria-label="Tiktok"><i class="fab fa-tiktok"></i></a>
             </div>
+            <p>&copy; 2025 Dulces Delicias. Todos los derechos reservados.</p>
+            <p>Diseñado con <i class="fas fa-heart"></i> por [Dilan Galvis / Brayan Vásquez / Ronal Álvarez / Juan Graciano / Andrey Estrada]</p>
+        </div>
+        </footer>
 
-            <div id="campo-postres" class="col-md-3 d-none">
-                <label>Tamaño</label>
-                <select id="size-pastry" class="form-control">
-                    <option value="Pequeño">Pequeño</option><option value="Mediano">Mediano</option><option value="Grande">Grande</option>
-                </select>
-            </div>
-
-            <div id="campo-cupcakes" class="col-md-3 d-none">
-                <label>Cobertura</label>
-                <select id="flavor" class="form-control">
-                    <option value="Chocolate">Chocolate</option><option value="Vainilla">Vainilla</option><option value="Frutos Rojos">Frutos Rojos</option>
-                </select>
-            </div>
-
-            <div id="campo-galletas" class="col-md-3 d-none">
-                <label>Tipo</label>
-                <select id="type-cookie" class="form-control"> <option value="Crujiente">Crujiente</option><option value="Suave">Suave</option>
-                </select>
-            </div>     
-                   
-            <div class="col-12">
-                <button type="submit" id="btnGuardar" class="btn btn-success">Guardar</button>
-            </div>
-        </form>
-    </section>
-
-    <table class="table table-striped" id="tablaProductos">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Sabor</th>
-                <th>Precio</th>
-                <th>Stock</th>
-                <th>Tipo</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tbody">
-            </tbody>
-    </table>
-
+    <script src="js/auth.js"></script>
     <script src="js/crudProductos.js"></script>
-    <script src="js/logout.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -793,3 +793,33 @@ input, select {
 #productForm {
     margin-top: 20px;
 }
+
+/*Boton borrar para crudPedidos/*
+/* Estilo del boton borrar */
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: background-color 0.2s ease;
+}
+
+/* Efecto hover de boton borrar */
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* Estilo para tabla sin pedidos*/
+.td-vacido {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+}
+/* Efecto hover para boton entregado*/
+.btn-success:hover {
+     background-color: darken(var(--primary-color), 10%);
+    transform: translateY(-2px);
+}

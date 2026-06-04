@@ -8,13 +8,13 @@ function renderizarPedidos() {
     tbody.innerHTML = '';
 
     if (pedidos.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No hay pedidos registrados.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="td-vacido">No hay pedidos registrados.</td></tr>';
         return;
     }
 
     pedidos.forEach((pedido, index) => {
         const fila = document.createElement('tr');
-        // Aseguramos que productos sea un array legible
+       
         const nombresProductos = pedido.productos.map(p => p.name).join(', ');
         
         fila.innerHTML = `
@@ -25,6 +25,8 @@ function renderizarPedidos() {
             <td>
                 <button class="btn btn-primary" onclick="cambiarEstado(${index}, 'En Proceso')">Procesar</button>
                 <button class="btn btn-success" onclick="cambiarEstado(${index}, 'Entregado')">Entregado</button>
+                <button class="btn btn-danger" onclick="borrarPedido(${index})">
+                    <i class="fas fa-trash"></i> 
             </td>
         `;
         tbody.appendChild(fila);
@@ -38,4 +40,19 @@ window.cambiarEstado = (index, nuevoEstado) => {
         localStorage.setItem('pedidosGlobales', JSON.stringify(pedidos));
         renderizarPedidos();
     }
+
+    window.borrarPedido = (index) => {
+    let pedidos = JSON.parse(localStorage.getItem('pedidosGlobales')) || [];
+    
+    
+    if (confirm('¿Estás seguro de que deseas borrar este pedido?')) {
+       
+        pedidos.splice(index, 1);
+        
+        
+        localStorage.setItem('pedidosGlobales', JSON.stringify(pedidos));
+        
+        renderizarPedidos();
+    }
+}
 };
